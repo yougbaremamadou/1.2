@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <set> // Pour utiliser les ensembles std::set
+
+int main() {
+    // Créer trois ensembles de nombres
+    std::set<int> setA = {1, 2, 3, 4, 5};
+    std::set<int> setB = {4, 5, 6, 7, 8};
+    std::set<int> setC = {5, 8, 9, 10};
+
+    // --- Calcul de l'intersection ---
+    std::vector<int> intersection1;
+    std::set_intersection(setA.begin(), setA.end(),
+                          setB.begin(), setB.end(),
+                          std::back_inserter(intersection1));
+
+    std::vector<int> intersectionFinal;
+    std::set_intersection(intersection1.begin(), intersection1.end(),
+                          setC.begin(), setC.end(),
+                          std::back_inserter(intersectionFinal));
+
+    std::cout << "Intersection (A ∩ B ∩ C): { ";
+    for (int val : intersectionFinal) {
+        std::cout << val << " ";
+    }
+    std::cout << "}\n"; // Résultat : { 5 }
+
+    // --- Calcul de l'union ---
+    std::vector<int> union1;
+    std::set_union(setA.begin(), setA.end(),
+                   setB.begin(), setB.end(),
+                   std::back_inserter(union1));
+
+    std::vector<int> unionFinal;
+    std::set_union(union1.begin(), union1.end(),
+                   setC.begin(), setC.end(),
+                   std::back_inserter(unionFinal));
+
+    std::cout << "Union (A ∪ B ∪ C): { ";
+    for (int val : unionFinal) {
+        std::cout << val << " ";
+    }
+    std::cout << "}\n"; // Résultat : { 1 2 3 4 5 6 7 8 9 10 }
+
+    return 0;
+}
+
